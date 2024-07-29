@@ -9,31 +9,37 @@ class ResultsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            const Text("You Answered X out of Y questions correctly"),
-            const SizedBox(
-              height: 30,
-            ),
-            const QuestionsSummary(),
-            const SizedBox(
-              height: 30,
-            ),
-            TextButton(
-                onPressed: () {
-                  ref.read(screenProvider.notifier).state = Screen.start;
-                  ref.read(answeredListProvider.notifier).state = [];
-                },
-                style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    backgroundColor: const Color.fromARGB(255, 108, 3, 127)),
-                child: const Text("Restart Quizz"))
-          ],
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              const Text(
+                "You Answered X out of Y questions correctly",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const QuestionsSummary(),
+              const SizedBox(
+                height: 15,
+              ),
+              TextButton(
+                  onPressed: () {
+                    ref.read(screenProvider.notifier).state = Screen.start;
+                    ref.read(answeredListProvider.notifier).state = [];
+                  },
+                  style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      backgroundColor: const Color.fromARGB(255, 108, 3, 127)),
+                  child: const Text("Restart Quizz"))
+            ],
+          ),
         ),
       ),
     );

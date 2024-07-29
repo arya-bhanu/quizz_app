@@ -21,11 +21,39 @@ class QuestionsSummary extends ConsumerWidget {
     }).toList();
 
     return Column(
-      children: summaries
-          .map((e) => Row(
-                children: [Text((((e['index']) as int) + 1).toString())],
-              ))
-          .toList(),
+      children: [
+        ...summaries
+            .map((e) => [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        (((e['index']) as int) + 1).toString(),
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(e['question']),
+                            Text(
+                              e['correct_answer'],
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              e['user_answer'],
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 15),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                ])
+            .expand((element) => element),
+      ],
     );
   }
 }
